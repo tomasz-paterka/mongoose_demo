@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const cool = require('cool-ascii-faces')
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+const cool = require('cool-ascii-faces');
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-express()
+app.get('/', (req, res) => res.send('Hello world'));
+app.get('/cool', (req, res) => res.send(cool()));	
 	
-	.get('/', (req, res) => res.send('Hello world'))
-	.get('/cool', (req, res) => res.send(cool()))
-	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+	
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://test-user:test-user@ds235169.mlab.com:35169/mongoose_demo', {
