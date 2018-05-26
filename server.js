@@ -1,8 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const cool = require('cool-ascii-faces')
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
+
+express()
+	.use(express.static(path.join(__dirname, 'public')))
+	.set('views', path.join(__dirname, 'views'))
+	.set('view engine', 'ejs')
+	.get('/', (req, res) => res.render('pages/index'))
+	.get('/cool', (req, res) => res.send(cool()))
+	.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/nodeappdatabase', {
+mongoose.connect('mongodb://test-user:test-user@ds235169.mlab.com:35169/mongoose_demo', {
 	useMongoClient: true
 });
 
